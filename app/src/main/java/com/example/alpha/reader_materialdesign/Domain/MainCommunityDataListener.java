@@ -7,5 +7,5 @@ import java.util.ArrayList;
  */
 
 public interface MainCommunityDataListener {
-    void getData(ArrayList<MainCommunity> list);
+    void getData(ArrayList<Post> list);
 }

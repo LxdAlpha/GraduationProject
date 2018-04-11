@@ -179,7 +179,7 @@ public class FindBookDetailActivity extends AppCompatActivity {
             mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
                 @Override
                 public boolean onTagClick(View view, int position, FlowLayout parent) {
-                    Intent intent = new Intent(parent.getContext(), CommunityActivity.class);
+                    Intent intent = new Intent(parent.getContext(), WebActivity.class);
                     intent.putExtra("url", tagUrl.get(position));
                     parent.getContext().startActivity(intent);
                     return true;
@@ -233,7 +233,7 @@ public class FindBookDetailActivity extends AppCompatActivity {
             viewMoreCommments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CommunityActivity.class);
+                    Intent intent = new Intent(context, WebActivity                                                                               .class);
                     intent.putExtra("url", s);
                     context.startActivity(intent);
                 }
@@ -271,7 +271,7 @@ public class FindBookDetailActivity extends AppCompatActivity {
             viewAllCommments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CommunityActivity.class);
+                    Intent intent = new Intent(context, WebActivity.class);
                     intent.putExtra("url", s);
                     context.startActivity(intent);
                 }

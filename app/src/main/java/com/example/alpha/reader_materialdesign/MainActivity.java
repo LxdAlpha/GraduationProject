@@ -61,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            /*
             case R.id.search:
                 return true;
+                */
             case R.id.features:
                 View view = findViewById(R.id.features);
                 showPopupMenu(view);
@@ -116,9 +118,11 @@ public class MainActivity extends AppCompatActivity {
                         WebService.start(context);
                         new PopupMenuDialog(context).builder().setCancelable(false).setCanceledOnTouchOutside(false).show();
                         return true;
+                        /*
                     case R.id.setting:
                         Toast.makeText(MainActivity.this, "99", Toast.LENGTH_SHORT).show();
                         return true;
+                        */
                     default:
                         return true;
                 }

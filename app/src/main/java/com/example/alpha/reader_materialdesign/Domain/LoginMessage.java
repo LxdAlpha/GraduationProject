@@ -7,6 +7,7 @@ package com.example.alpha.reader_materialdesign.Domain;
 public class LoginMessage {
     private String status;
     private String login;
+    private int userId;
 
     public String getStatus() {
         return status;
@@ -22,5 +23,13 @@ public class LoginMessage {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

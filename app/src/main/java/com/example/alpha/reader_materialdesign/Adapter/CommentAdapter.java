@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.alpha.reader_materialdesign.CommunityActivity;
 import com.example.alpha.reader_materialdesign.Domain.BookCommentItem;
 import com.example.alpha.reader_materialdesign.R;
+import com.example.alpha.reader_materialdesign.WebActivity;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(parent.getContext(), CommunityActivity.class);
+                Intent intent = new Intent(parent.getContext(), WebActivity.class);
                 intent.putExtra("url", list.get(holder.getAdapterPosition()).getBookCommentItemUrl());
                 parent.getContext().startActivity(intent);
             }

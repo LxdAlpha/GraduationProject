@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alpha.reader_materialdesign.Domain.LoginMessage;
+import com.example.alpha.reader_materialdesign.Domain.Url;
 import com.example.alpha.reader_materialdesign.Domain.User;
 import com.google.gson.Gson;
 
@@ -45,7 +46,7 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 User user = new User();
-                user.setName(name.getText().toString());
+                user.setUsername(name.getText().toString());
                 user.setPassword(password.getText().toString());
                 new login().execute(user);
             }
@@ -65,11 +66,11 @@ public class AccountActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(User... users) {
             Map<String, String> parms = new HashMap<>();
-            parms.put("user.username", users[0].getName());
+            parms.put("user.username", users[0].getUsername());
             parms.put("user.password", users[0].getPassword());
             String result = null;
             try {
-                result = sendPOSTRequest("http://192.168.0.104:8088/kevin/user_login.action", parms, "utf-8");
+                result = sendPOSTRequest(Url.baseUrl + "kevin/user_login.action", parms, "utf-8");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -86,6 +87,7 @@ public class AccountActivity extends AppCompatActivity {
             }else{
                 SharedPreferences.Editor editor = getSharedPreferences("loginData", MODE_PRIVATE).edit();
                 editor.putString("login", "true");
+                editor.putInt("userId", message.getUserId());
                 editor.apply();
                 finish();
             }

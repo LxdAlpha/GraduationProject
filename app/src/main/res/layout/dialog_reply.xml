@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回 帖"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:textColor="#000000"/>
+    <EditText
+        android:id="@+id/edittext_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="回帖 跟帖"/>
+    <Button
+        android:id="@+id/button_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

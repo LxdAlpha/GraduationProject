@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.alpha.reader_materialdesign.Domain.LoginMessage;
 import com.example.alpha.reader_materialdesign.Domain.RegisterMessage;
+import com.example.alpha.reader_materialdesign.Domain.Url;
 import com.example.alpha.reader_materialdesign.Domain.User;
 import com.google.gson.Gson;
 
@@ -68,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 User user = new User();
-                user.setName(userName.getText().toString());
+                user.setUsername(userName.getText().toString());
                 user.setPassword(passWord.getText().toString());
                 new register().execute(user);
             }
@@ -81,11 +82,11 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(User... users) {
             Map<String, String> parms = new HashMap<>();
-            parms.put("user.username", users[0].getName());
+            parms.put("user.username", users[0].getUsername());
             parms.put("user.password", users[0].getPassword());
             String result = null;
             try {
-                result = sendPOSTRequest("http://192.168.0.104:8088/kevin/user_add.action", parms, "utf-8");
+                result = sendPOSTRequest(Url.baseUrl + "kevin/user_add.action", parms, "utf-8");
             } catch (Exception e) {
                 e.printStackTrace();
             }

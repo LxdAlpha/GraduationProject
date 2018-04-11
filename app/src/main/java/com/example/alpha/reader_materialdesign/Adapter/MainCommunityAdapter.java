@@ -1,15 +1,19 @@
 package com.example.alpha.reader_materialdesign.Adapter;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.alpha.reader_materialdesign.CommunityActivity;
-import com.example.alpha.reader_materialdesign.Domain.MainCommunity;
+import com.example.alpha.reader_materialdesign.Domain.Post;
+import com.example.alpha.reader_materialdesign.Domain.User;
 import com.example.alpha.reader_materialdesign.R;
+import com.example.alpha.reader_materialdesign.Utils.UserUtil;
 
 import java.util.ArrayList;
 
@@ -18,10 +22,16 @@ import java.util.ArrayList;
  */
 
 public class MainCommunityAdapter extends RecyclerView.Adapter<MainCommunityAdapter.ViewHolder>{
-    private ArrayList<MainCommunity> list;
+    private ArrayList<Post> list;
+    private ArrayList<User> userList;
 
-    public MainCommunityAdapter(ArrayList<MainCommunity> list){
+    public MainCommunityAdapter(ArrayList<Post> list){
         this.list = list;
+        LoadTask loadTask = new LoadTask();
+        loadTask.execute();
+        while(userList == null){
+
+        }
     }
 
 
@@ -33,9 +43,11 @@ public class MainCommunityAdapter extends RecyclerView.Adapter<MainCommunityAdap
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
+
                 Intent intent = new Intent(parent.getContext(), CommunityActivity.class);
-                intent.putExtra("url", list.get(position).getUrl());
+                intent.putExtra("parentId", list.get(position).getId());
                 parent.getContext().startActivity(intent);
+
             }
         });
         return holder;
@@ -44,11 +56,21 @@ public class MainCommunityAdapter extends RecyclerView.Adapter<MainCommunityAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String title = list.get(position).getTitle();
-        String content = list.get(position).getShortContent();
-        String writer = list.get(position).getWriter();
-        String time = list.get(position).getTime();
+        //String writer = userList.get(position).getUsername();
+        String writer = "";
+        for(User user: userList){
+            if(user.getId() == list.get(position).getUserId()){
+                writer = user.getUsername();
+                break;
+            }
+        }
+            /*
+            user = new User();
+            user.setPassword("123");
+            user.setName("lxd");
+            user.setId(1);*/
+        String time = list.get(position).getTime().toString();
         holder.title.setText(title);
-        holder.content.setText(content);
         holder.writer.setText(writer);
         holder.time.setText(time);
     }
@@ -61,17 +83,29 @@ public class MainCommunityAdapter extends RecyclerView.Adapter<MainCommunityAdap
     static class ViewHolder extends RecyclerView.ViewHolder{
         View view;
         TextView title;
-        TextView content;
         TextView writer;
         TextView time;
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             title = itemView.findViewById(R.id.main_community_item_title);
-            content = itemView.findViewById(R.id.main_coomunity_item_content);
             writer = itemView.findViewById(R.id.main_community_item_writer);
             time = itemView.findViewById(R.id.main_community_item_time);
         }
+    }
+
+    class LoadTask extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            try {
+                userList = UserUtil.getAllUser();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
     }
 }
 

@@ -189,6 +189,8 @@ public class WebService extends Service {
                             body.setDataCallback((DataEmitter emitter, ByteBufferList bb) -> {
                                 fileUploadHolder.write(bb.getAllByteArray());
                                 bb.recycle();
+
+                                //todo 打开文件夹让用户查看
                             });
                         } else {
                             if (body.getDataCallback() == null) {
@@ -350,6 +352,8 @@ public class WebService extends Service {
             if (fileOutPutStream != null) {
                 try {
                     fileOutPutStream.write(data);
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
